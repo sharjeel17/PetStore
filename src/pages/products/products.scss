@@ -1,0 +1,6 @@
+@import "../../mixins";
+
+.products {
+    width: 100%;
+    @include d-flex(row, center, center);
+}
