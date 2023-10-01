@@ -3,6 +3,7 @@ import Navbar from "./components/navbar/Navbar.tsx"
 import "./index.scss"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Products from "./pages/products/Products.tsx";
+import AddProduct from "./pages/addproduct/AddProduct.tsx";
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
         {/* NESTED ROUTE */}
         <Route path="/products">
           <Route index element={<Products />}/>
+          <Route path="add" element={<AddProduct />}/>
         </Route>
       </Routes>
       
