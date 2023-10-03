@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../constants/url.constants';
 
 const AddProduct = () => {
-  console.log("runs 2");
   const [products, setProducts] = useState<Partial<IProduct>>({brand:'',name:''})
   const redirect = useNavigate();
 
@@ -26,7 +25,7 @@ const AddProduct = () => {
     }
 
     axios.post(baseUrl+"/productCreation", data)
-      .then((res) => redirect("/products"))
+      .then(() => redirect("/products", {state: {message : "Product has been added"}}))
       .catch((err) => console.log(err));
   }
 

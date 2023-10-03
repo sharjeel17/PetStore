@@ -10,11 +10,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 
 const Products:React.FC = () => {
-  console.log("runs");
   const [products, setProducts] = useState<IProduct[]>([]);
   const redirect = useNavigate();
   const location = useLocation();
   console.log(location);
+
+  
   const getProductsList = async () => {
     try {
       const response = await axios.get<IProduct[]>(baseUrl+"/api/Products");
@@ -57,8 +58,10 @@ const Products:React.FC = () => {
                       <td>{product.name}</td>
                       <td>{moment(product.createdAt).fromNow()}</td>
                       <td>{moment(product.updatedAt).fromNow()}</td>
-                      <Button variant="outlined" color="warning" sx={{mx:3}}><Edit/></Button>
-                      <Button variant="outlined" color="warning"><Delete/></Button>
+                      <td>
+                        <Button variant="outlined" color="warning" sx={{mx:3}}><Edit/></Button>
+                        <Button variant="outlined" color="warning"><Delete/></Button>
+                      </td>
                     </tr>
                   ))
                 }
