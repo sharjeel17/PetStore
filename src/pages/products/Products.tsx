@@ -7,10 +7,21 @@ import { Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import moment from "moment";
 import { useLocation, useNavigate } from "react-router-dom";
+import EditModal from "../../components/editModal/EditModal";
 
 
 const Products:React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [isOpenEdit, setIsOpenEdit] = useState<boolean>(false);
+  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct>({
+    id: "",
+    name: "",
+    brand: "",
+    createdAt: "",
+    updatedAt: ""
+  });
+  
   const redirect = useNavigate();
   const location = useLocation();
   console.log(location);
@@ -59,18 +70,31 @@ const Products:React.FC = () => {
                       <td>{moment(product.createdAt).fromNow()}</td>
                       <td>{moment(product.updatedAt).fromNow()}</td>
                       <td>
-                        <Button variant="outlined" color="warning" sx={{mx:3}}><Edit/></Button>
-                        <Button variant="outlined" color="warning"><Delete/></Button>
+                        <Button variant="outlined" color="warning" sx={{mx:3}} onClick={() => {
+                          setSelectedProduct(product); 
+                          setIsOpenEdit(true);
+                          }}>
+                          <Edit/>
+                        </Button>
+                        <Button variant="outlined" color="warning" onClick={() => {
+                          setSelectedProduct(product);
+                          setIsOpenDelete(true);
+                        }}>
+                          <Delete/>
+                        </Button>
                       </td>
                     </tr>
                   ))
                 }
               </tbody>
             </table>
-
           </div>
         )
       }
+
+      {isOpenEdit && (
+        <EditModal selectedProduct={selectedProduct} closeIcon={() => setIsOpenEdit(false)}/>
+      )}
     </div>
   )
 }
