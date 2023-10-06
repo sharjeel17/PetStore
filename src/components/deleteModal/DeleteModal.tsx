@@ -1,4 +1,3 @@
-import React from 'react'
 import { IProduct } from '../../types/global.types'
 import "../editModal/editmodal.css"
 import "./deletemodal.css"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import "./editmodal.css";
 import { IProduct } from '../../types/global.types';
 import axios from 'axios';
