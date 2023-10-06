@@ -7,13 +7,13 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {
     selectedProduct: IProduct;
-    closeIcon: () => void
+    closeIcon: () => void;
 }
 const EditModal = ({selectedProduct, closeIcon}: Props) => {
     const [updatedProduct, setUpdatedProduct] = useState<Partial<IProduct>>({brand: selectedProduct.brand,
                                                                             name: selectedProduct.name});
     const redirect = useNavigate();
-    const handleUpdate = async () => {;
+    const handleUpdate = async () => {
         if(updatedProduct.name === '' || updatedProduct.brand === '') {
             alert("Fill out given fields");
             return;
@@ -37,9 +37,9 @@ const EditModal = ({selectedProduct, closeIcon}: Props) => {
             <div style={{height: '100%', boxSizing: 'content-box'}}>
                 <form className='editModalForm'>
                     <label>Name</label>
-                    <input type='text' value={updatedProduct.name} onChange={(e) => setUpdatedProduct({...updatedProduct, name: e.target.value})}/>
+                    <input className='inputEditModal ' type='text' value={updatedProduct.name} onChange={(e) => setUpdatedProduct({...updatedProduct, name: e.target.value})}/>
                     <label>Brand</label>
-                    <input type='text' value={updatedProduct.brand} onChange={(e) => setUpdatedProduct({...updatedProduct, brand: e.target.value})}/>
+                    <input className='inputEditModal ' type='text' value={updatedProduct.brand} onChange={(e) => setUpdatedProduct({...updatedProduct, brand: e.target.value})}/>
                     <button className='buttonSave' onClick={handleUpdate}>Save</button>
                 </form>
             </div>

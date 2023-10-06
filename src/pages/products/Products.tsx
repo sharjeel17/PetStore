@@ -8,6 +8,7 @@ import { Delete, Edit } from "@mui/icons-material";
 import moment from "moment";
 import { useLocation, useNavigate } from "react-router-dom";
 import EditModal from "../../components/editModal/EditModal";
+import DeleteModal from "../../components/deleteModal/DeleteModal";
 
 
 const Products:React.FC = () => {
@@ -92,8 +93,12 @@ const Products:React.FC = () => {
         )
       }
 
-      {isOpenEdit && (
+      {isOpenEdit && (!isOpenDelete) && (
         <EditModal selectedProduct={selectedProduct} closeIcon={() => setIsOpenEdit(false)}/>
+      )}
+
+      {isOpenDelete && (!isOpenEdit) && (
+        <DeleteModal selectedProduct={selectedProduct} closeIcon={() => setIsOpenDelete(false)}/>
       )}
     </div>
   )

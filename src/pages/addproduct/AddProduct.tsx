@@ -12,7 +12,7 @@ const AddProduct = () => {
     setProducts({...products, [event.target.name]:event.target.value})
   }
 
-  const handleAdd = (event:any) =>{
+  const handleAdd = async (event:any) =>{
     event.preventDefault();
     if(products.name === '' || products.brand === '') {
       alert("Fill out given fields");
