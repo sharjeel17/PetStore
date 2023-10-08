@@ -25,7 +25,6 @@ const Products:React.FC = () => {
   
   const redirect = useNavigate();
   const location = useLocation();
-  console.log(location);
 
   
   const getProductsList = async () => {

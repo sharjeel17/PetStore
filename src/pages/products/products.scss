@@ -1,7 +1,7 @@
 @import "../../mixins";
 
 .products {
-    width: 100%;
+    box-sizing: content-box;
     @include d-flex(column, center, center);
 }
 

@@ -42,6 +42,11 @@ const AddProduct = () => {
         <input type='text' name='brand' value={products.brand} onChange={handleChange} className='inputAddProduct'></input>
         <label>Name</label>
         <input type='text' name='name' value={products.name} onChange={handleChange} className='inputAddProduct'></input>
+        <label>Image</label>
+        <input type='file' accept='image/png, image/jpeg'></input>
+        <div>
+          
+        </div>
         <div>
           <button onClick={handleAdd} className='buttonAddProduct'>Add</button>
           <button onClick={handleBack} className='buttonAddProduct'>Back</button>

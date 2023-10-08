@@ -30,8 +30,8 @@ const EditModal = ({selectedProduct, closeIcon}: Props) => {
     }
 
   return (
-    <div className='editModalContainer'>
-        <div className="innerContainer">
+    <div className='editModalContainer' onClick={closeIcon}>
+        <div className="innerContainer" onClick={e => e.stopPropagation()}>
             <p className='closeIcon' onClick={closeIcon}>X</p>
             <h2 style={{textAlign: 'center', margin: '10px'}}>Edit product</h2>
             <div style={{height: '100%', boxSizing: 'content-box'}}>
