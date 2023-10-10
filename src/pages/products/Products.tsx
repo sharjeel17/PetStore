@@ -18,7 +18,10 @@ const Products:React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<IProduct>({
     id: "",
     name: "",
-    brand: "",
+    animal: "",
+    breed: "",
+    imageSrc: "",
+    imageFile: null,
     createdAt: "",
     updatedAt: ""
   });
@@ -29,7 +32,8 @@ const Products:React.FC = () => {
   
   const getProductsList = async () => {
     try {
-      const response = await axios.get<IProduct[]>(baseUrl+"/api/Products");
+      const response = await axios.get<IProduct[]>(baseUrl+"/Products");
+      console.log(response.data);
       setProducts(response.data);
       if(location?.state){
         alert(location.state.message);
@@ -65,7 +69,7 @@ const Products:React.FC = () => {
                 {
                   products.map(product => (
                     <tr key={product.id}>
-                      <td>{product.brand}</td>
+                      <td>{product.animal}</td>
                       <td>{product.name}</td>
                       <td>{moment(product.createdAt).fromNow()}</td>
                       <td>{moment(product.updatedAt).fromNow()}</td>
