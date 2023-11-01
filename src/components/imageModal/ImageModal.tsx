@@ -1,4 +1,3 @@
-import React from 'react'
 import "./imagemodal.css";
 
 type Props = {
