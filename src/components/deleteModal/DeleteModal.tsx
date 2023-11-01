@@ -11,7 +11,9 @@ type Props = {
 }
 
 const DeleteModal = ({selectedProduct, closeIcon}: Props) => {
+    
 const redirect = useNavigate();
+
 const handleDelete = async () => {
     axios.delete(baseUrl+`/${selectedProduct.id}`)
             .then(() => redirect(0)) //refreshes page

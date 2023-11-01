@@ -10,6 +10,7 @@ import defaultImage from "../../assets/default.png";
 const AddProduct = () => {
   const redirect = useNavigate();
 
+  //set initial state of product
   const [products, setProducts] = useState<Partial<IProduct>>({
     animal:'',
     name:'',
@@ -18,17 +19,24 @@ const AddProduct = () => {
     imageFile: null
   });
 
+  //back button handler
   const handleBack = () => {
     redirect("/products");
   }
+
+  //changing product values handler 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     setProducts({...products, [event.target.name]:event.target.value})
   }
 
+  //set image preview and image inside of product
   const imagePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    //if an image is selected then set image
     if(e.target.files && e.target.files[0]){
       let imageFile: File = e.target.files[0];
       const reader = new FileReader();
+
       reader.onload = (x) => {
         setProducts({
           ...products,
@@ -36,22 +44,28 @@ const AddProduct = () => {
           imageSrc: x.target?.result
         })
       }
+
       reader.readAsDataURL(imageFile);
+    }
+
+    //otherwise set image to default values
+    else {
+      setProducts({
+        ...products,
+        imageSrc: defaultImage,
+        imageFile: null
+      })
     }
   }
   
-  const handleAdd = async (event:any) =>{
+  //add product details to form and send form data to backend
+  const handleAdd = async (event:any) => {
     event.preventDefault();
 
     if(products.name === '' || products.animal === '' || products.breed === '' || products.imageFile === null) {
       alert("Fill out given fields");
       return;
     }
-
-    // const data: Partial<IProduct> = {
-    //   name: products.name,
-    //   animal: products.animal,
-    // }
 
     const formData = new FormData();
     formData.append('name', products.name as string);

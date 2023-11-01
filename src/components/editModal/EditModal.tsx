@@ -10,18 +10,19 @@ type Props = {
     closeIcon: () => void;
 }
 const EditModal = ({selectedProduct, closeIcon}: Props) => {
-    const [updatedProduct, setUpdatedProduct] = useState<Partial<IProduct>>({brand: selectedProduct.brand,
+    const [updatedProduct, setUpdatedProduct] = useState<Partial<IProduct>>({animal: selectedProduct.animal,
                                                                             name: selectedProduct.name});
     const redirect = useNavigate();
+    
     const handleUpdate = async () => {
-        if(updatedProduct.name === '' || updatedProduct.brand === '') {
+        if(updatedProduct.name === '' || updatedProduct.animal === '') {
             alert("Fill out given fields");
             return;
           }
       
           const data: Partial<IProduct> = {
             name: updatedProduct.name,
-            brand: updatedProduct.brand
+            animal: updatedProduct.animal
           }
       
           axios.put(baseUrl+`/${selectedProduct.id}`, data)
@@ -38,8 +39,8 @@ const EditModal = ({selectedProduct, closeIcon}: Props) => {
                 <form className='editModalForm'>
                     <label>Name</label>
                     <input className='inputEditModal ' type='text' value={updatedProduct.name} onChange={(e) => setUpdatedProduct({...updatedProduct, name: e.target.value})}/>
-                    <label>Brand</label>
-                    <input className='inputEditModal ' type='text' value={updatedProduct.brand} onChange={(e) => setUpdatedProduct({...updatedProduct, brand: e.target.value})}/>
+                    <label>Animal</label>
+                    <input className='inputEditModal ' type='text' value={updatedProduct.animal} onChange={(e) => setUpdatedProduct({...updatedProduct, animal: e.target.value})}/>
                     <button className='buttonSave' onClick={handleUpdate}>Save</button>
                 </form>
             </div>

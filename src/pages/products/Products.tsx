@@ -5,16 +5,19 @@ import axios from "axios";
 import { baseUrl } from "../../constants/url.constants";
 import { Button } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
+import ImageIcon from '@mui/icons-material/Image';
 import moment from "moment";
 import { useLocation, useNavigate } from "react-router-dom";
 import EditModal from "../../components/editModal/EditModal";
 import DeleteModal from "../../components/deleteModal/DeleteModal";
+import ImageModal from "../../components/imageModal/ImageModal";
 
 
 const Products:React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isOpenEdit, setIsOpenEdit] = useState<boolean>(false);
   const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false);
+  const [isOpenImage, setIsOpenImage] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<IProduct>({
     id: "",
     name: "",
@@ -45,6 +48,7 @@ const Products:React.FC = () => {
       console.error(err);
     }
   }
+  
   useEffect(() => {
     getProductsList();
   }, []);
@@ -58,7 +62,7 @@ const Products:React.FC = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Brand</th>
+                  <th>Animal</th>
                   <th>Name</th>
                   <th>Created</th>
                   <th>Modified</th>
@@ -77,14 +81,26 @@ const Products:React.FC = () => {
                         <Button variant="outlined" color="warning" sx={{mx:3}} onClick={() => {
                           setSelectedProduct(product); 
                           setIsOpenEdit(true);
+                          setIsOpenDelete(false);
+                          setIsOpenImage(false);
                           }}>
                           <Edit/>
                         </Button>
                         <Button variant="outlined" color="warning" onClick={() => {
                           setSelectedProduct(product);
                           setIsOpenDelete(true);
+                          setIsOpenEdit(false);
+                          setIsOpenImage(false);
                         }}>
                           <Delete/>
+                        </Button>
+                        <Button variant="outlined" color="warning" sx={{mx:3}} onClick={() => {
+                          setSelectedProduct(product); 
+                          setIsOpenImage(true);
+                          setIsOpenEdit(false);
+                          setIsOpenDelete(false);
+                        }}>
+                          <ImageIcon />
                         </Button>
                       </td>
                     </tr>
@@ -96,12 +112,16 @@ const Products:React.FC = () => {
         )
       }
 
-      {isOpenEdit && (!isOpenDelete) && (
+      {isOpenEdit && (!isOpenDelete) && (!isOpenImage) && (
         <EditModal selectedProduct={selectedProduct} closeIcon={() => setIsOpenEdit(false)}/>
       )}
 
-      {isOpenDelete && (!isOpenEdit) && (
+      {isOpenDelete && (!isOpenEdit) && (!isOpenImage) && (
         <DeleteModal selectedProduct={selectedProduct} closeIcon={() => setIsOpenDelete(false)}/>
+      )}
+
+      {isOpenImage && (!isOpenEdit) && (!isOpenDelete) && (
+        <ImageModal selectedImage={selectedProduct.imageSrc as string} closeIcon={() => setIsOpenImage(false)}/>
       )}
     </div>
   )
